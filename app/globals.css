@@ -1,26 +1,295 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --jsf-900: #060d06;
+  --jsf-800: #0d170d;
+  --jsf-700: #152015;
+  --jsf-600: #2ba84a;
+  --jsf-400: #7eda58;   /* NEW: mid-gradient green */
+  --jsf-300: #5dd62c;
+  --jsf-100: #d2ff28;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-jsf-900: var(--jsf-900);
+  --color-jsf-800: var(--jsf-800);
+  --color-jsf-700: var(--jsf-700);
+  --color-jsf-600: var(--jsf-600);
+  --color-jsf-400: var(--jsf-400);
+  --color-jsf-300: var(--jsf-300);
+  --color-jsf-100: var(--jsf-100);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--jsf-900);
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ─── Gradient text utility ─── */
+.gradient-text {
+  background: linear-gradient(100deg, #5dd62c 0%, #7eda58 45%, #d2ff28 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Wider gradient for large headings */
+.gradient-text-hero {
+  background: linear-gradient(115deg, #2ba84a 0%, #5dd62c 30%, #7eda58 60%, #d2ff28 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Animated gradient BG ─── */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ─── Pulse ring for map dots ─── */
+@keyframes pulseRing {
+  0%   { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* ─── Float / bob animation ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+.float-anim { animation: float 4s ease-in-out infinite; }
+
+/* ─── Shimmer sweep ─── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ─── Rotating border ─── */
+@keyframes rotateBorder {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Word mask for GSAP word-split reveals ─── */
+.word-mask {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  line-height: 1.15;
+}
+.word-mask .word-inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ─── Line mask for GSAP line reveals ─── */
+.line-mask {
+  overflow: hidden;
+  line-height: 1.15;
+  display: block;
+}
+
+/* ─── GSAP reveal classes (opacity set to 0 initially by JS) ─── */
+.gsap-reveal { will-change: transform, opacity; }
+
+/* ─── Card hover ─── */
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(93,214,44,0.14);
+  border-color: var(--jsf-400) !important;
+}
+
+/* ─── Magnetic button base ─── */
+.magnetic-btn {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* ─── Counter ─── */
+.counter-value { font-family: "Syne", sans-serif; font-weight: 800; }
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--jsf-900); }
+::-webkit-scrollbar-thumb { background: var(--jsf-600); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--jsf-400); }
+
+/* ─── Section spacing ─── */
+.section-pad { padding-top: 5rem; padding-bottom: 5rem; }
+@media (min-width: 768px) { .section-pad { padding-top: 7rem; padding-bottom: 7rem; } }
+
+/* ─── Grid background ─── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(93,214,44,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(93,214,44,0.045) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Glowing accent line ─── */
+.glow-line {
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, var(--jsf-300) 35%, var(--jsf-400) 65%, transparent 100%);
+  filter: blur(0.5px);
+}
+
+/* ─── Gradient border card ─── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(93,214,44,0.35), rgba(126,218,88,0.2), rgba(210,255,40,0.15));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ─── Tag chips ─── */
+.product-tag {
+  font-size: 11px;
+  color: var(--jsf-300);
+  background: rgba(93,214,44,0.07);
+  border: 1px solid rgba(93,214,44,0.18);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* ─── Contact / form responsive 2-col grid ─── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+}
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* ─── Responsive: tablet ─── */
+@media (max-width: 768px) {
+  /* Tighten section spacing */
+  .section-pad {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  /* Hero decorative rings — hide on small screens to prevent visual clutter */
+  .hero-ring-deco {
+    display: none;
+  }
+
+  /* Hero stat badges — single row scroll on mobile */
+  .hero-stat-row {
+    gap: 0.625rem;
+  }
+
+  /* Footer columns — 2 columns on tablet */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Responsive: phone ─── */
+@media (max-width: 540px) {
+  /* Full-single-column layouts */
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid {
+    gap: 2rem;
+  }
+
+  /* Footer back to single column on phone */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Hero headline font floor */
+  .hero-line-1,
+  .hero-line-2 {
+    font-size: clamp(2.2rem, 10vw, 3.5rem) !important;
+  }
+
+  /* Page hero font floor */
+  .phero-title,
+  .phero-highlight {
+    font-size: clamp(1.75rem, 8vw, 3.5rem);
+  }
+
+  /* Section horizontal padding tightening */
+  .section-inner-pad {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* CTA buttons stack */
+  .cta-btn-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cta-btn-row a,
+  .cta-btn-row button {
+    text-align: center;
+  }
+}
+
+/* ─── Prevent horizontal overflow globally ─── */
+section, header, footer {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* ─── Hero content padding — less top space on mobile ─── */
+@media (max-width: 640px) {
+  .hero-content-pad {
+    padding-top: 6.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  /* CTA buttons fill full width on small screens */
+  .hero-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-cta-row a {
+    text-align: center;
+  }
+
+  /* Tighten hero badge */
+  .hero-badge {
+    font-size: 11px;
+  }
+}
+
+/* ─── Navbar height on mobile — slightly shorter ─── */
+@media (max-width: 768px) {
+  .nav-inner {
+    height: 72px !important;
+  }
 }
