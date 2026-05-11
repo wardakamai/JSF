@@ -2,18 +2,37 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import PageHero from '@/components/shared/PageHero';
 import SectionReveal from '@/components/shared/SectionReveal';
+import Breadcrumb from '@/components/shared/Breadcrumb';
 import CTABanner from '@/components/home/CTABanner';
 
 export const metadata: Metadata = {
-  title: 'Our Services',
+  title: 'Oil Storage & Logistics Services — Tank Farm Operations',
   description:
-    'JSF Logistics offers oil storage, marine shipping, product blending, laboratory testing, road transportation, and pipeline facilitation from four global energy terminals.',
-  keywords: ['oil storage services', 'marine shipping', 'product blending', 'petroleum laboratory testing', 'road transport fuel', 'pipeline facilitation'],
+    'JSF Logistics offers crude oil storage, marine shipping, product blending, laboratory testing, road transportation, and pipeline facilitation from four global tank farm terminals.',
+  keywords: ['oil storage services', 'crude oil tank farm', 'marine shipping', 'product blending', 'petroleum laboratory testing', 'pipeline facilitation', 'liquid bulk terminal'],
+  alternates: {
+    canonical: 'https://jsf-logistics.com/services',
+  },
   openGraph: {
-    title: 'Energy Logistics Services — JSF Logistics B.V.',
+    title: 'Oil Storage & Logistics Services — JSF Logistics B.V.',
     description:
-      'From large-capacity tank storage to VLCC vessel handling — explore the full spectrum of oil and gas logistics services from JSF Logistics.',
+      'From large-capacity tank storage to VLCC vessel handling — full-spectrum oil and gas logistics services from JSF Logistics terminals in Rotterdam, Houston, Fujairah, and Jurong.',
     url: 'https://jsf-logistics.com/services',
+    images: [
+      {
+        url: '/images/hero-tanker.webp',
+        width: 1200,
+        height: 630,
+        alt: 'JSF Logistics Oil Storage & Logistics Services',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Oil Storage & Logistics Services — JSF Logistics B.V.',
+    description:
+      'Crude oil storage, marine shipping, product blending, pipeline facilitation and lab testing from four global terminal locations.',
+    images: ['/images/hero-tanker.webp'],
   },
 };
 
@@ -95,6 +114,10 @@ export default function ServicesPage() {
         highlight="Logistics Services"
         subtitle="From tank storage to marine operations, we provide the full spectrum of oil and gas logistics services your business depends on."
       />
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'Oil Storage & Logistics Services' },
+      ]} />
 
       <section style={{ background: 'var(--jsf-900)' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
@@ -164,6 +187,31 @@ export default function ServicesPage() {
                   </div>
                 </div>
               </SectionReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Terminal cross-links — bidirectional internal linking */}
+      <section style={{ background: 'var(--jsf-800)', borderTop: '1px solid rgba(93,214,44,0.1)', padding: '3rem 1.5rem' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <p style={{ fontSize: '12px', fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.14em', marginBottom: '1.25rem' }}>AVAILABLE AT OUR TERMINALS</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+            {[
+              { href: '/terminals#rotterdam', label: 'Oil storage in Rotterdam' },
+              { href: '/terminals#houston', label: 'Oil storage in Houston' },
+              { href: '/terminals#jurong', label: 'Oil storage in Jurong' },
+              { href: '/terminals#fujairah', label: 'Oil storage in Fujairah' },
+            ].map(({ href, label }) => (
+              <Link key={href} href={href} style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.5rem 1rem', background: 'var(--jsf-700)',
+                border: '1px solid rgba(93,214,44,0.15)', borderRadius: '8px',
+                fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.7)',
+                textDecoration: 'none',
+              }}>
+                {label} →
+              </Link>
             ))}
           </div>
         </div>

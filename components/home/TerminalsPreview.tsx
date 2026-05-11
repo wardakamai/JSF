@@ -5,10 +5,10 @@ import Image from 'next/image';
 import SectionReveal from '@/components/shared/SectionReveal';
 
 const terminals = [
-  { flag: '🇳🇱', city: 'Port of Rotterdam', country: 'Netherlands', tagline: "Europe's largest energy hub", throughput: '400M+', image: '/images/terminal-rotterdam.jpg', products: ['Fuel Oil', 'Crude', 'Gasoil', 'Jet Fuel', 'Chemicals'] },
-  { flag: '🇺🇸', city: 'Port of Houston', country: 'Texas, USA', tagline: "America's energy trading centre", throughput: '240M+', image: '/images/terminal-houston.jpg', products: ['Crude Oil', 'LPG', 'Refined', 'Chemicals', 'Bitumen'] },
-  { flag: '🇸🇬', city: 'Port of Jurong', country: 'Singapore', tagline: 'Asia-Pacific bulk & liquid specialist', throughput: '580M+', image: '/images/terminal-jurong.jpg', products: ['Fuel Oil', 'Crude', 'Naphtha', 'Gas Oil', 'Chemicals'] },
-  { flag: '🇦🇪', city: 'Port of Fujairah', country: 'UAE', tagline: 'Arabian Sea strategic position', throughput: 'Top 3', image: '/images/terminal-fujairah.webp', products: ['Bunker Fuel', 'Crude', 'Gasoil', 'Jet Fuel', 'LNG'] },
+  { flag: '🇳🇱', city: 'Port of Rotterdam', country: 'Netherlands', tagline: "Europe's largest energy hub", throughput: '400M+', image: '/images/terminal-rotterdam.jpg', imageAlt: 'JSF Logistics oil storage tank farm at Port of Rotterdam, Netherlands', anchor: 'rotterdam', linkLabel: 'Oil storage in Rotterdam', products: ['Fuel Oil', 'Crude', 'Gasoil', 'Jet Fuel', 'Chemicals'] },
+  { flag: '🇺🇸', city: 'Port of Houston', country: 'Texas, USA', tagline: "America's energy trading centre", throughput: '240M+', image: '/images/terminal-houston.jpg', imageAlt: 'JSF Logistics liquid bulk terminal at Port of Houston, Texas USA', anchor: 'houston', linkLabel: 'Oil storage in Houston', products: ['Crude Oil', 'LPG', 'Refined', 'Chemicals', 'Bitumen'] },
+  { flag: '🇸🇬', city: 'Port of Jurong', country: 'Singapore', tagline: 'Asia-Pacific bulk & liquid specialist', throughput: '580M+', image: '/images/terminal-jurong.jpg', imageAlt: 'JSF Logistics tank farm at Port of Jurong, Singapore', anchor: 'jurong', linkLabel: 'Oil storage in Jurong', products: ['Fuel Oil', 'Crude', 'Naphtha', 'Gas Oil', 'Chemicals'] },
+  { flag: '🇦🇪', city: 'Port of Fujairah', country: 'UAE', tagline: 'Arabian Sea strategic position', throughput: 'Top 3', image: '/images/terminal-fujairah.webp', imageAlt: 'JSF Logistics petroleum storage terminal at Port of Fujairah, UAE', anchor: 'fujairah', linkLabel: 'Oil storage in Fujairah', products: ['Bunker Fuel', 'Crude', 'Gasoil', 'Jet Fuel', 'LNG'] },
 ];
 
 export default function TerminalsPreview() {
@@ -47,7 +47,7 @@ export default function TerminalsPreview() {
               }}>
                 {/* Image */}
                 <div style={{ position: 'relative', height: '160px', overflow: 'hidden' }}>
-                  <Image src={t.image} alt={t.city} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 25vw" />
+                  <Image src={t.image} alt={t.imageAlt} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 25vw" />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(6,13,6,0.2) 0%, rgba(6,13,6,0.7) 100%)' }} />
                   <div style={{ position: 'absolute', top: '0.75rem', right: '0.75rem' }}>
                     <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--jsf-300)', background: 'rgba(6,13,6,0.75)', padding: '0.2rem 0.6rem', borderRadius: '100px', border: '1px solid rgba(93,214,44,0.3)' }}>● ACTIVE</span>
@@ -74,11 +74,17 @@ export default function TerminalsPreview() {
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem', marginBottom: '0.875rem' }}>
                     {t.products.map(p => (
                       <span key={p} style={{ fontSize: '10px', color: 'var(--jsf-300)', background: 'rgba(93,214,44,0.07)', border: '1px solid rgba(93,214,44,0.15)', padding: '0.15rem 0.45rem', borderRadius: '4px' }}>{p}</span>
                     ))}
                   </div>
+                  <Link
+                    href={`/terminals#${t.anchor}`}
+                    style={{ fontSize: '12px', fontWeight: 700, color: 'var(--jsf-300)', textDecoration: 'none', letterSpacing: '0.04em', display: 'inline-block', borderTop: '1px solid rgba(93,214,44,0.08)', paddingTop: '0.75rem', width: '100%' }}
+                  >
+                    {t.linkLabel} →
+                  </Link>
                 </div>
               </div>
             </SectionReveal>

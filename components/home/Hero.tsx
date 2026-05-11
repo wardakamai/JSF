@@ -150,7 +150,7 @@ export default function Hero() {
 
       {/* BG image (Ken Burns target) */}
       <div ref={bgRef} style={{ position: 'absolute', inset: '-10%', transformOrigin: 'center center' }}>
-        <Image src="/images/hero-tanker.webp" alt="" fill priority
+        <Image src="/images/hero-tanker.webp" alt="JSF Logistics oil tanker at global terminal — energy logistics and tank farm operations" fill priority
           style={{ objectFit: 'cover', objectPosition: 'center' }} sizes="120vw" />
       </div>
 
@@ -189,12 +189,12 @@ export default function Hero() {
           <WordSplit text="Powering Progress." />
         </h1>
 
-        {/* Headline line 2 — gradient */}
-        <h1 className="hero-line-2" style={{ fontSize: 'clamp(2.8rem, 7.5vw, 6rem)', lineHeight: 1.0, marginBottom: '2rem', display: 'block' }}>
+        {/* Headline line 2 — gradient (same h1 context, div avoids duplicate h1) */}
+        <div className="hero-line-2" style={{ fontSize: 'clamp(2.8rem, 7.5vw, 6rem)', lineHeight: 1.0, marginBottom: '2rem', display: 'block' }}>
           <span className="gradient-text-hero">
             <WordSplit text="Delivering Energy." />
           </span>
-        </h1>
+        </div>
 
         <p className="hero-sub" style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'rgba(255,255,255,0.7)', lineHeight: 1.8, maxWidth: '540px', marginBottom: '2.75rem' }}>
           JSF Logistics B.V. is a trusted partner in oil &amp; gas storage and logistics — operating strategically placed terminals across four global ports to keep energy moving worldwide.
@@ -226,7 +226,7 @@ export default function Hero() {
         {/* Floating stat badges */}
         <div className="hero-stat-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.875rem', marginTop: '3.5rem' }}>
           {[
-            { value: '15+', label: 'Years Experience' },
+            { value: '5+', label: 'Years Experience' },
             { value: '4', label: 'Global Terminals' },
             { value: '500+', label: 'Partners' },
           ].map(s => (

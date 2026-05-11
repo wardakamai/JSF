@@ -1,18 +1,37 @@
 import type { Metadata } from 'next';
 import PageHero from '@/components/shared/PageHero';
 import SectionReveal from '@/components/shared/SectionReveal';
+import Breadcrumb from '@/components/shared/Breadcrumb';
 import CTABanner from '@/components/home/CTABanner';
 
 export const metadata: Metadata = {
-  title: 'Laboratory Services',
+  title: 'Petroleum Lab Testing — ASTM Accredited Terminal Laboratories',
   description:
-    'ASTM-accredited petroleum and marine fuel laboratories at all four JSF Logistics terminals. Rapid analytical testing, independent surveying, and quality certification for every cargo.',
-  keywords: ['petroleum laboratory testing', 'ASTM accredited lab', 'marine fuel analysis', 'crude oil testing', 'chemical analysis petroleum', 'bunker fuel quality'],
+    'ASTM-accredited petroleum and marine fuel laboratories at all four JSF Logistics terminals in Rotterdam, Houston, Fujairah, and Jurong. Rapid analytical testing, independent surveying, and quality certification for every cargo.',
+  keywords: ['petroleum laboratory testing', 'ASTM accredited petroleum lab', 'marine fuel analysis', 'crude oil testing', 'chemical analysis petroleum', 'bunker fuel quality testing'],
+  alternates: {
+    canonical: 'https://jsf-logistics.com/laboratory',
+  },
   openGraph: {
-    title: 'Accredited Laboratory Services — JSF Logistics B.V.',
+    title: 'Petroleum Lab Testing — ASTM Accredited Terminal Laboratories | JSF Logistics',
     description:
       'ASTM and ISO-method analytical laboratories at Rotterdam, Houston, Jurong, and Fujairah. Fast, independent petroleum and marine fuel testing with full certification.',
     url: 'https://jsf-logistics.com/laboratory',
+    images: [
+      {
+        url: '/images/hero-tanker.webp',
+        width: 1200,
+        height: 630,
+        alt: 'JSF Logistics ASTM Accredited Petroleum Laboratory Services',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Petroleum Lab Testing — ASTM Accredited Terminal Laboratories',
+    description:
+      'ASTM-accredited petroleum and marine fuel laboratories at Rotterdam, Houston, Fujairah, and Jurong. Fast, independent testing with full certification.',
+    images: ['/images/hero-tanker.webp'],
   },
 };
 
@@ -63,6 +82,10 @@ export default function LaboratoryPage() {
         highlight="Laboratory Services"
         subtitle="Our ASTM-accredited laboratories operate at all four global terminals, delivering accurate, fast, and independent quality analysis for every cargo we handle."
       />
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'Laboratory Services' },
+      ]} />
 
       {/* Intro */}
       <section style={{ background: 'var(--jsf-800)', padding: '5rem 1.5rem', borderBottom: '1px solid rgba(93,214,44,0.1)' }}>

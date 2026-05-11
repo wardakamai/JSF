@@ -52,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE}/contact`,
       lastModified: now,
       changeFrequency: 'yearly',
-      priority: 0.65,
+      priority: 0.6,
     },
   ];
 }

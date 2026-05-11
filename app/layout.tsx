@@ -51,8 +51,11 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
   icons: {
-    icon: '/images/site--logoo.png',
-    shortcut: '/images/site--logoo.png',
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/images/site--logoo.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
     apple: '/images/site--logoo.png',
   },
 };
@@ -75,7 +78,7 @@ const jsonLd = {
   contactPoint: [
     { '@type': 'ContactPoint', telephone: '+32-678-954-564', contactType: 'customer service', email: 'info@jsf-logistics.com' },
   ],
-  sameAs: [],
+  sameAs: ['https://www.linkedin.com/company/jsf-logistics'],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Energy Logistics Services',

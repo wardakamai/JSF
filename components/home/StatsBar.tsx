@@ -8,7 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { value: 15, suffix: '+', label: 'Years Experience', desc: 'In global energy logistics', icon: '◆' },
+  { value: 5, suffix: '+', label: 'Years Experience', desc: 'In global energy logistics', icon: '◆' },
   { value: 4, suffix: '', label: 'Strategic Terminals', desc: 'Rotterdam · Houston · Jurong · Fujairah', icon: '◈' },
   { value: 250, suffix: '+', label: 'Vessel Handlers', desc: 'Annual marine operations', icon: '◇' },
   { value: 500, suffix: '+', label: 'Global Partners', desc: 'Across 40+ countries', icon: '◉' },

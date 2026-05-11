@@ -2,18 +2,37 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHero from '@/components/shared/PageHero';
 import SectionReveal from '@/components/shared/SectionReveal';
+import Breadcrumb from '@/components/shared/Breadcrumb';
 import CTABanner from '@/components/home/CTABanner';
 
 export const metadata: Metadata = {
-  title: 'Petroleum Products',
+  title: 'Petroleum Products — Crude Oil, Fuel Oil & Chemical Storage',
   description:
-    'JSF Logistics handles crude oil, fuel oil, gas oil, jet fuel, chemicals, and LPG across our four global terminals — with full quality management and certification at every stage.',
-  keywords: ['crude oil storage', 'fuel oil bunker', 'gas oil diesel terminal', 'jet fuel storage', 'chemical storage', 'LPG storage', 'petroleum products'],
+    'JSF Logistics stores crude oil, fuel oil, gas oil, jet fuel, specialty chemicals, and LPG across four global tank farm terminals — with full quality management and certification at every stage.',
+  keywords: ['crude oil storage', 'fuel oil bunker storage', 'gas oil diesel terminal', 'jet fuel storage', 'chemical tank storage', 'LPG storage', 'petroleum products terminal'],
+  alternates: {
+    canonical: 'https://jsf-logistics.com/products',
+  },
   openGraph: {
-    title: 'Petroleum Products We Handle — JSF Logistics B.V.',
+    title: 'Petroleum Products — Crude Oil, Fuel Oil & Chemical Storage | JSF Logistics',
     description:
-      'From crude oil to specialty chemicals — JSF Logistics manages the full range of petroleum products with precision quality assurance at every terminal.',
+      'From crude oil to specialty chemicals — JSF Logistics manages the full range of petroleum products with precision quality assurance across Rotterdam, Houston, Fujairah, and Jurong.',
     url: 'https://jsf-logistics.com/products',
+    images: [
+      {
+        url: '/images/hero-tanker.webp',
+        width: 1200,
+        height: 630,
+        alt: 'JSF Logistics Petroleum Products — Crude Oil, Fuel Oil & Chemical Storage',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Petroleum Products — Crude Oil, Fuel Oil & Chemical Storage',
+    description:
+      'Crude oil, fuel oil, gas oil, jet fuel, chemicals, and LPG storage across four global tank farm terminals.',
+    images: ['/images/hero-tanker.webp'],
   },
 };
 
@@ -71,6 +90,10 @@ export default function ProductsPage() {
         highlight="Handle & Store"
         subtitle="From crude oil to specialty chemicals, our terminals accommodate the full spectrum of petroleum products with precision quality management at every step."
       />
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'Petroleum Products' },
+      ]} />
 
       <section className="section-pad" style={{ background: 'var(--jsf-900)' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>

@@ -1,18 +1,37 @@
 import type { Metadata } from 'next';
 import PageHero from '@/components/shared/PageHero';
 import SectionReveal from '@/components/shared/SectionReveal';
+import Breadcrumb from '@/components/shared/Breadcrumb';
 import CTABanner from '@/components/home/CTABanner';
 
 export const metadata: Metadata = {
-  title: 'Health, Safety & Environment',
+  title: 'Health, Safety & Environment — ISO Certified Terminal Operations',
   description:
-    'JSF Logistics upholds ISO 9001, ISO 14001, and ISO 45001 certified HSE standards across all operations. Safety, environmental responsibility, and quality are embedded in every decision we make.',
-  keywords: ['HSE oil terminal', 'ISO 9001 logistics', 'ISO 14001 environment', 'ISO 45001 safety', 'petroleum HSE policy', 'energy company safety standards'],
+    'JSF Logistics upholds ISO 9001, ISO 14001, and ISO 45001 certified HSE standards across all oil storage terminal operations. Safety, environmental responsibility, and quality are embedded in every decision.',
+  keywords: ['HSE oil terminal', 'ISO 9001 logistics', 'ISO 14001 environment', 'ISO 45001 safety', 'petroleum HSE policy', 'energy company safety', 'tank farm HSE'],
+  alternates: {
+    canonical: 'https://jsf-logistics.com/hse',
+  },
   openGraph: {
-    title: 'Health, Safety & Environment — JSF Logistics B.V.',
+    title: 'Health, Safety & Environment — ISO Certified Terminal Operations | JSF Logistics',
     description:
-      'ISO-certified health, safety, and environmental management across all four JSF Logistics terminals. Safety is not a department — it is our culture.',
+      'ISO 9001, ISO 14001, and ISO 45001 certified HSE management across all four JSF Logistics terminals. Safety is not a department — it is our culture.',
     url: 'https://jsf-logistics.com/hse',
+    images: [
+      {
+        url: '/images/hero-tanker.webp',
+        width: 1200,
+        height: 630,
+        alt: 'JSF Logistics Health, Safety & Environment — ISO Certified Operations',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Health, Safety & Environment — ISO Certified Terminal Operations',
+    description:
+      'ISO 9001, 14001, and 45001 certified HSE management across all four JSF Logistics oil storage terminals.',
+    images: ['/images/hero-tanker.webp'],
   },
 };
 
@@ -66,7 +85,7 @@ const pillars = [
 const stats = [
   { value: '0', label: 'LTIF (Lost Time Injury Frequency)', sub: '2024 rolling 12-month average' },
   { value: '100%', label: 'Operations audited annually', sub: 'Internal and third-party' },
-  { value: '15+', label: 'Years without major incident', sub: 'Across all four terminals' },
+  { value: '5+', label: 'Years without major incident', sub: 'Across all four terminals' },
   { value: '4', label: 'ISO certifications held', sub: '9001 · 14001 · 45001 · ISPS' },
 ];
 
@@ -79,6 +98,10 @@ export default function HSEPage() {
         highlight="Environment"
         subtitle="At JSF Logistics, HSE is not a department — it is a culture embedded in every decision, every operation, and every person on our sites."
       />
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'Health, Safety & Environment' },
+      ]} />
 
       {/* Policy Statement */}
       <section style={{ background: 'var(--jsf-800)', padding: '5rem 1.5rem', borderBottom: '1px solid rgba(93,214,44,0.1)' }}>

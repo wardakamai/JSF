@@ -1,18 +1,37 @@
 import type { Metadata } from 'next';
 import PageHero from '@/components/shared/PageHero';
 import SectionReveal from '@/components/shared/SectionReveal';
+import Breadcrumb from '@/components/shared/Breadcrumb';
 import CTABanner from '@/components/home/CTABanner';
 
 export const metadata: Metadata = {
-  title: 'About Us',
+  title: 'About JSF Logistics — Oil & Gas Terminal Operator Since 2008',
   description:
-    'Learn about JSF Logistics B.V. — founded in 2008, we are a global oil and gas storage and logistics company headquartered in Eindhoven, Netherlands, with terminals across four continents.',
-  keywords: ['JSF Logistics history', 'oil and gas company Netherlands', 'energy logistics company', 'petroleum storage company'],
+    'JSF Logistics B.V. is a global oil storage and tank farm operator founded in 2008, headquartered in Eindhoven, Netherlands, with terminals in Rotterdam, Houston, Fujairah, and Jurong.',
+  keywords: ['JSF Logistics history', 'oil storage company Netherlands', 'energy logistics company', 'petroleum terminal operator', 'tank farm operator'],
+  alternates: {
+    canonical: 'https://jsf-logistics.com/about',
+  },
   openGraph: {
-    title: 'About JSF Logistics B.V. — Our Story & Mission',
+    title: 'About JSF Logistics B.V. — Oil & Gas Terminal Operator Since 2008',
     description:
-      'Founded in 2008, JSF Logistics B.V. has grown into a trusted global partner for oil & gas storage across Rotterdam, Houston, Jurong, and Fujairah.',
+      'Founded in 2008, JSF Logistics B.V. has grown into a trusted global oil storage and tank farm operator across Rotterdam, Houston, Fujairah, and Jurong.',
     url: 'https://jsf-logistics.com/about',
+    images: [
+      {
+        url: '/images/hero-tanker.webp',
+        width: 1200,
+        height: 630,
+        alt: 'JSF Logistics B.V. — Oil & Gas Terminal Operator',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About JSF Logistics B.V. — Oil & Gas Terminal Operator Since 2008',
+    description:
+      'Founded in 2008, JSF Logistics B.V. is a trusted global oil storage and tank farm operator with terminals in Rotterdam, Houston, Fujairah, and Jurong.',
+    images: ['/images/hero-tanker.webp'],
   },
 };
 
@@ -43,6 +62,10 @@ export default function AboutPage() {
         highlight="Driven by Energy."
         subtitle="JSF Logistics B.V. is a global oil and gas storage and shipping company headquartered in Eindhoven, Netherlands, with operations across four strategic international terminals."
       />
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'About JSF Logistics' },
+      ]} />
 
       {/* Mission & Vision */}
       <section className="section-pad" style={{ background: 'var(--jsf-900)' }}>

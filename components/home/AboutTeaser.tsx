@@ -111,7 +111,7 @@ export default function AboutTeaser() {
               border: '1px solid rgba(93,214,44,0.25)', borderRadius: '10px',
               padding: '0.75rem 1rem',
             }}>
-              <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '1.4rem', color: 'var(--jsf-100)', lineHeight: 1 }}>15+</div>
+              <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '1.4rem', color: 'var(--jsf-100)', lineHeight: 1 }}>5+</div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)', marginTop: '0.2rem' }}>Years of Operations</div>
             </div>
             {/* Top-right accent */}

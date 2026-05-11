@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import PageHero from '@/components/shared/PageHero';
 import SectionReveal from '@/components/shared/SectionReveal';
+import Breadcrumb from '@/components/shared/Breadcrumb';
 
 const serviceOptions = [
   'Oil Storage', 'Marine Shipping', 'Product Blending',
@@ -82,6 +83,10 @@ export default function ContactPageContent() {
         highlight="Conversation."
         subtitle="We respond to every enquiry within 24 hours. Whether you need storage, shipment, sourcing, or simply want to understand your options — we're here."
       />
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'Contact Us' },
+      ]} />
 
       <section className="section-pad" style={{ background: 'var(--jsf-900)' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>

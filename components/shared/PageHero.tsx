@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
@@ -22,9 +23,10 @@ interface PageHeroProps {
   highlight?: string;
   subtitle?: string;
   image?: string;
+  imageAlt?: string;
 }
 
-export default function PageHero({ label, title, highlight, subtitle, image }: PageHeroProps) {
+export default function PageHero({ label, title, highlight, subtitle, image, imageAlt }: PageHeroProps) {
   const heroRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
@@ -61,7 +63,14 @@ export default function PageHero({ label, title, highlight, subtitle, image }: P
     }}>
       {image && (
         <>
-          <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          <Image
+            src={image}
+            alt={imageAlt ?? 'JSF Logistics terminal'}
+            fill
+            priority
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            sizes="100vw"
+          />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(6,13,6,0.94) 0%, rgba(6,13,6,0.80) 60%, rgba(13,23,13,0.65) 100%)' }} />
         </>
       )}
