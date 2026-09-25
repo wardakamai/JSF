@@ -9,6 +9,8 @@ export const company = {
   phone: '+32 678 954-564',
   phoneHref: 'tel:+32678954564',
   phoneSchema: '+32-678-954-564',
+  whatsapp: '32460245595',
+  whatsappDisplay: '+32 460 24 55 95',
   email: 'info@jsf-logistics.com',
   storageEmail: 'storage@jsf-logistics.com',
   linkedin: 'https://www.linkedin.com/company/jsf-logistics',

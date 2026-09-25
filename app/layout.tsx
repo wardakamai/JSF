@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ImpersonationNotice from '@/components/shared/ImpersonationNotice';
+import WhatsAppButton from '@/components/shared/WhatsAppButton';
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -129,6 +130,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <WhatsAppButton />
         <ImpersonationNotice />
       </body>
     </html>
