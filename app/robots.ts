@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 
+export const dynamic = 'force-static';
+
 const BASE = 'https://jsf-logistics.com';
 
 export default function robots(): MetadataRoute.Robots {
@@ -8,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: [],
+        disallow: ['/send.php'],
       },
     ],
     sitemap: `${BASE}/sitemap.xml`,

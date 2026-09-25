@@ -1,12 +1,21 @@
 import type { Metadata, Viewport } from 'next';
+import { Archivo } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/layout/Navbar';
+import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import ImpersonationNotice from '@/components/shared/ImpersonationNotice';
+
+const archivo = Archivo({
+  subsets: ['latin'],
+  axes: ['wdth'],
+  display: 'swap',
+  variable: '--font-archivo',
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#060d06',
+  themeColor: '#1b7a38',
 };
 
 export const metadata: Metadata = {
@@ -26,12 +35,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'JSF Logistics B.V.',
+    locale: 'en_US',
+    url: 'https://jsf-logistics.com',
     title: 'JSF Logistics B.V. — Global Oil & Gas Storage & Shipping',
     description:
       'Strategic oil & gas storage terminals in Rotterdam, Houston, Jurong, and Fujairah. Marine shipping, product blending, and pipeline facilitation worldwide.',
     images: [
       {
-        url: '/images/hero-tanker.webp',
+        url: '/images/og-jsf-logistics.jpg',
         width: 1200,
         height: 630,
         alt: 'JSF Logistics — Global Energy Logistics',
@@ -43,7 +54,7 @@ export const metadata: Metadata = {
     title: 'JSF Logistics B.V. — Global Oil & Gas Storage',
     description:
       'Strategic oil & gas storage terminals across four global ports. Marine shipping, blending, and pipeline facilitation.',
-    images: ['/images/hero-tanker.webp'],
+    images: ['/images/og-jsf-logistics.jpg'],
   },
   robots: {
     index: true,
@@ -53,11 +64,20 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
-      { url: '/images/site--logoo.png', sizes: '192x192', type: 'image/png' },
+      { url: '/images/icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
     shortcut: '/favicon.ico',
-    apple: '/images/site--logoo.png',
+    apple: { url: '/images/apple-touch-icon.png', sizes: '180x180' },
   },
+};
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'JSF Logistics B.V.',
+  url: 'https://jsf-logistics.com',
+  inLanguage: 'en',
+  publisher: { '@type': 'Organization', name: 'JSF Logistics B.V.', url: 'https://jsf-logistics.com' },
 };
 
 const jsonLd = {
@@ -65,7 +85,7 @@ const jsonLd = {
   '@type': 'Organization',
   name: 'JSF Logistics B.V.',
   url: 'https://jsf-logistics.com',
-  logo: 'https://jsf-logistics.com/images/site--logoo.png',
+  logo: 'https://jsf-logistics.com/images/logo-512.png',
   description:
     'JSF Logistics B.V. is a global oil and gas storage and logistics company with terminals in Rotterdam, Houston, Jurong, and Fujairah.',
   address: {
@@ -93,20 +113,23 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={archivo.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
       </head>
       <body>
-        <Navbar />
-        <main>{children}</main>
+        <a className="skip-link" href="#main">Skip to content</a>
+        <Header />
+        <main id="main">{children}</main>
         <Footer />
+        <ImpersonationNotice />
       </body>
     </html>
   );

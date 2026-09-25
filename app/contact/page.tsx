@@ -10,13 +10,16 @@ export const metadata: Metadata = {
     canonical: 'https://jsf-logistics.com/contact',
   },
   openGraph: {
+    type: 'website',
+    siteName: 'JSF Logistics B.V.',
+    locale: 'en_US',
     title: 'Contact JSF Logistics B.V. — Request an Oil Storage Quote',
     description:
       'Reach out for oil storage, tank farm availability, marine shipping, or product blending enquiries. Terminals in Rotterdam, Houston, Jurong, and Fujairah.',
     url: 'https://jsf-logistics.com/contact',
     images: [
       {
-        url: '/images/hero-tanker.webp',
+        url: '/images/og-jsf-logistics.jpg',
         width: 1200,
         height: 630,
         alt: 'JSF Logistics B.V. — Contact Our Oil Storage Team',
@@ -28,7 +31,7 @@ export const metadata: Metadata = {
     title: 'Contact JSF Logistics B.V. — Request an Oil Storage Quote',
     description:
       'Get in touch for oil storage, tank farm availability, marine shipping, or blending enquiries. Response within 24 hours.',
-    images: ['/images/hero-tanker.webp'],
+    images: ['/images/og-jsf-logistics.jpg'],
   },
 };
 
@@ -37,7 +40,7 @@ const contactJsonLd = {
   '@type': 'Organization',
   name: 'JSF Logistics B.V.',
   url: 'https://jsf-logistics.com',
-  logo: 'https://jsf-logistics.com/images/site--logoo.png',
+  logo: 'https://jsf-logistics.com/images/logo-512.png',
   description: 'Oil storage and tank farm terminal operator in Rotterdam, Houston, Fujairah and Jurong.',
   address: {
     '@type': 'PostalAddress',

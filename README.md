@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JSF Logistics B.V. — website
 
-## Getting Started
+Next.js site exported as plain static files for cPanel hosting. The contact and laboratory forms are
+sent by a small PHP script (`public/send.php`) to info@jsf-logistics.com, through Private Email's SMTP
+server (mail.privateemail.com) using a real mailbox login.
 
-First, run the development server:
+## Work on the site
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000 (forms can't send here: PHP only runs on the server)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Content that appears on several pages (terminals, services, address, phone) lives in `lib/site.ts`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy to cPanel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run package      # builds ./out and zips it to jsf-logistics-cpanel.zip
+```
 
-## Learn More
+1. In cPanel, open **File Manager → public_html**. Back up and remove the old site files if any.
+2. Upload `jsf-logistics-cpanel.zip` and choose **Extract**. `index.html`, `.htaccess`, `send.php`,
+   `_next/` and `images/` must end up directly inside `public_html`.
+   (Turn on **Settings → Show Hidden Files** to see `.htaccess`.)
+3. Make sure SSL is active for jsf-logistics.com (**SSL/TLS Status → Run AutoSSL**). The `.htaccess`
+   redirects everything to `https://jsf-logistics.com`.
+4. Test the forms on `/contact` and `/laboratory` and check that the email arrives at info@jsf-logistics.com.
 
-To learn more about Next.js, take a look at the following resources:
+### Form email login
+`send.php` reads the mailbox login from `/home/jansckte/jsf-mail-config.php`. That file sits outside the
+website folder so it can never be downloaded, and it is not part of this repo:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```php
+<?php
+return [
+    'user' => 'info@jsf-logistics.com',
+    'pass' => 'mailbox password',
+];
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+If you change the mailbox password in Private Email, update it in this file too (cPanel → File Manager →
+home folder). If the form shows "could not send", the reason is logged in `error_log` inside the website
+folder (blocked from public access by `.htaccess`).
 
-## Deploy on Vercel
+### If the site shows "too many redirects"
+Your host (or Cloudflare) terminates HTTPS before Apache. Replace the first rule block in `.htaccess` with:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```apache
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L,NE]
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Images
+
+Pages load pre-compressed WebP files from `public/images/opt/` (480, 960 and 1600px wide) through
+`lib/image-loader.ts`. When you add or replace a photo in `public/images/`, create the three sizes too:
+
+```bash
+cd public/images
+for w in 480 960 1600; do sips -s format png --resampleWidth $w photo.jpg --out /tmp/p.png && cwebp -q 72 /tmp/p.png -o opt/photo-$w.webp; done
+```
+
+## SEO checklist after launch
+- Submit `https://jsf-logistics.com/sitemap.xml` in Google Search Console.
+- When a page's content changes, update its date in `app/sitemap.ts`.
