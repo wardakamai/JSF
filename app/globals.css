@@ -195,20 +195,96 @@ h3 { font-size: 1.3rem; font-stretch: 110%; font-weight: 700; }
 .index-list p { color: var(--ink-2); }
 @media (max-width: 700px) { .index-list a { grid-template-columns: 1fr; gap: 0.4rem; padding: 1.25rem 0; } }
 
-/* ─── Terminal cards ─── */
-.terminal-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.75rem); }
-@media (max-width: 1000px) { .terminal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .terminal-grid { grid-template-columns: 1fr; } }
-.terminal-card { display: flex; flex-direction: column; }
-.terminal-card .photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 3px; margin-bottom: 1.1rem; background: var(--paper-2); }
-.terminal-card .photo img { object-fit: cover; }
-.terminal-card h3 { font-size: 1.6rem; font-stretch: 120%; }
-.terminal-card .where { color: var(--ink-2); font-size: 0.95rem; margin: 0.2rem 0 0.9rem; }
-.terminal-card dl { display: grid; grid-template-columns: auto 1fr; gap: 0.3rem 1rem; font-size: 0.95rem; padding: 0.8rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 0.9rem; }
-.terminal-card dt { color: var(--ink-2); }
-.terminal-card dd { font-weight: 700; }
-.terminal-card .products { font-size: 0.95rem; color: var(--ink-2); margin-bottom: 1rem; }
-.terminal-card .link { margin-top: auto; }
+/* ─── Terminal cards (home) ─── */
+.tcards { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+@media (max-width: 1000px) and (min-width: 701px) { .tcards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tcard { display: flex; }
+.tcard-link {
+  display: flex; flex-direction: column; width: 100%; text-decoration: none; color: var(--ink);
+  background: var(--surface); border-radius: 4px; overflow: hidden;
+  box-shadow: 0 1px 0 var(--line), 0 0 0 1px var(--line);
+  transition: box-shadow .25s, transform .25s;
+}
+.tcard-link:hover, .tcard-link:focus-visible { box-shadow: 0 18px 40px rgba(18, 38, 26, .14), 0 0 0 1px var(--line); transform: translateY(-3px); }
+
+.tcard-photo { position: relative; aspect-ratio: 4 / 3.4; overflow: hidden; background: var(--ink); clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); }
+.tcard-photo img { object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.tcard-link:hover .tcard-photo img, .tcard-link:focus-visible .tcard-photo img { transform: scale(1.06); }
+.tcard-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,38,26,.78) 0%, rgba(18,38,26,.1) 45%, transparent 60%); pointer-events: none; }
+.tcard-city { position: absolute; z-index: 1; left: 1.1rem; bottom: 1.35rem; color: #fff; font-size: clamp(1.6rem, 2.4vw, 2rem); font-stretch: 125%; }
+.tcard-time {
+  position: absolute; z-index: 1; top: 0.8rem; right: 0.8rem; font-size: 0.8rem; font-weight: 700;
+  background: rgba(255,255,255,.92); color: var(--ink); padding: 0.25rem 0.55rem; border-radius: 2px; font-variant-numeric: tabular-nums;
+}
+
+.tcard-body { display: flex; flex-direction: column; flex: 1; padding: 0.4rem 1.1rem 1.2rem; }
+.tcard-tag { color: var(--ink-2); font-size: 0.95rem; line-height: 1.45; margin-bottom: 1rem; }
+
+.tcard-stats { display: flex; gap: 1rem; align-items: stretch; padding: 0.9rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+.tcard-stats dl { display: grid; gap: 0.35rem; align-content: center; }
+.tcard-stats dl div { display: flex; flex-direction: column-reverse; }
+.tcard-stats dt { font-size: 0.8rem; color: var(--ink-2); }
+.tcard-stats dd { font-weight: 800; font-stretch: 112%; line-height: 1.15; }
+
+/* The tank: outline with a lime/green liquid that fills to the terminal's size (logo's diagonal split). */
+.tcard-tank {
+  position: relative; flex: none; width: 42px; height: 64px; border: 2px solid var(--ink);
+  border-radius: 8px 8px 2px 2px; overflow: hidden; background: var(--paper);
+}
+.tcard-tank::before { /* roof walkway */
+  content: ""; position: absolute; left: 3px; right: 3px; top: 4px; height: 2px; z-index: 2;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 5px);
+}
+.tcard-liquid {
+  position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--level) * 88%);
+  background: linear-gradient(to top right, #5bc72a 0 50%, var(--lime) 50.5%);
+}
+
+.tcard-products { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.1rem; }
+.tcard-products li { font-size: 0.82rem; padding: 0.15rem 0.5rem; background: var(--paper-2); border-radius: 2px; }
+
+.tcard-cta { margin-top: auto; font-weight: 700; color: var(--green); position: relative; align-self: flex-start; padding-bottom: 3px; }
+.tcard-cta::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: color-mix(in srgb, var(--green) 35%, transparent); }
+.tcard-cta::before { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--green); z-index: 1; transition: width .3s ease; }
+.tcard-link:hover .tcard-cta::before, .tcard-link:focus-visible .tcard-cta::before { width: 100%; }
+
+/* Reveal: only when JS is running (data-animate), so the cards are never hidden without it. */
+@media (prefers-reduced-motion: no-preference) {
+  .tcards[data-animate="on"] .tcard .tcard-photo { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+  .tcards[data-animate="on"] .tcard .tcard-city,
+  .tcards[data-animate="on"] .tcard .tcard-body { opacity: 0; transform: translateY(10px); }
+  .tcards[data-animate="on"] .tcard .tcard-liquid { height: 0; }
+
+  .tcards[data-animate="on"] .tcard.is-in .tcard-photo {
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+    transition: clip-path .9s cubic-bezier(.7,0,.2,1) var(--delay);
+  }
+  .tcards[data-animate="on"] .tcard.is-in .tcard-city,
+  .tcards[data-animate="on"] .tcard.is-in .tcard-body {
+    opacity: 1; transform: none;
+    transition: opacity .5s ease calc(var(--delay) + .45s), transform .5s ease calc(var(--delay) + .45s);
+  }
+  .tcards[data-animate="on"] .tcard.is-in .tcard-liquid {
+    height: calc(var(--level) * 88%);
+    transition: height 1.2s cubic-bezier(.3,.6,.2,1) calc(var(--delay) + .7s);
+  }
+}
+
+/* Mobile: swipeable carousel */
+.tcards-dots { display: none; }
+@media (max-width: 700px) {
+  .tcards {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 82%;
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin: 0 calc(-1 * var(--gutter)); padding: 0.25rem var(--gutter) 0.75rem; scroll-padding: 0 var(--gutter);
+  }
+  .tcards::-webkit-scrollbar { display: none; }
+  .tcard { scroll-snap-align: start; }
+  .tcard-link:hover, .tcard-link:focus-visible { transform: none; }
+  .tcards-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.75rem; }
+  .tcards-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: width .25s, background-color .25s; }
+  .tcards-dots span.is-current { width: 22px; border-radius: 4px; background: var(--green); }
+}
 
 /* ─── Media + text ─── */
 .media { position: relative; overflow: hidden; border-radius: 3px; background: var(--paper-2); }

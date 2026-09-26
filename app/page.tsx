@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import TerminalClocks from '@/components/shared/TerminalClocks';
+import TerminalCards from '@/components/home/TerminalCards';
 import CTABand from '@/components/shared/CTABand';
-import { services, terminals } from '@/lib/site';
-import { cityHref } from '@/lib/cities';
+import { services } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: {
@@ -129,23 +129,7 @@ export default function Home() {
             </div>
             <Link href="/terminals" className="link">Compare all terminals</Link>
           </div>
-          <div className="terminal-grid">
-            {terminals.map(t => (
-              <article key={t.anchor} className="terminal-card">
-                <div className="photo">
-                  <Image src={t.image} alt={t.imageAlt} fill sizes="(max-width: 560px) 100vw, (max-width: 1000px) 50vw, 25vw" />
-                </div>
-                <h3>{t.city}</h3>
-                <p className="where">{t.region}. {t.tagline}.</p>
-                <dl>
-                  <dt>Throughput</dt><dd>{t.throughput}</dd>
-                  <dt>Tanks</dt><dd>{t.tankCount}</dd>
-                </dl>
-                <p className="products">{t.products.slice(0, 5).join(', ')}</p>
-                <Link href={cityHref(t.anchor)} className="link">Oil storage in {t.city}</Link>
-              </article>
-            ))}
-          </div>
+          <TerminalCards />
         </div>
       </section>
 
