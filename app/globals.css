@@ -109,10 +109,11 @@ h3 { font-size: 1.3rem; font-stretch: 110%; font-weight: 700; }
 }
 .nav a:hover { color: var(--ink); }
 .nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--lime); }
-.header-cta { padding: 0.6rem 1.05rem; font-size: 0.95rem; }
+.header-cta { padding: 0.6rem 1.05rem; font-size: 0.95rem; white-space: nowrap; }
+.brand-name { white-space: nowrap; }
 .menu-btn { display: none; background: none; border: 2px solid var(--ink); border-radius: 4px; padding: 0.45rem 0.75rem; font: inherit; font-weight: 700; cursor: pointer; color: var(--ink); }
 .mobile-nav { display: none; }
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
   .nav, .header-cta { display: none; }
   .menu-btn { display: inline-block; }
   .mobile-nav[data-open="true"] { display: block; border-top: 1px solid var(--line); background: var(--surface); }
@@ -377,3 +378,28 @@ h3 { font-size: 1.3rem; font-stretch: 110%; font-weight: 700; }
 .wa-label { font-weight: 700; font-size: 0.95rem; color: #0b3d1f; white-space: nowrap; padding-right: 0.3rem; }
 @media (max-width: 700px) { .wa-label { display: none; } .wa-float { padding: 0; justify-content: center; } }
 @media print { .wa-float { display: none; } }
+
+/* ─── Steps (a real sequence, so numbered) ─── */
+.steps { list-style: none; counter-reset: step; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem 2rem; }
+.steps li { counter-increment: step; border-top: 2px solid var(--ink); padding-top: 1rem; }
+.steps li::before { content: counter(step); display: inline-grid; place-items: center; width: 2rem; height: 2rem; margin-bottom: 0.75rem; background: var(--lime); font-weight: 800; font-stretch: 115%; border-radius: 2px; }
+.steps h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.steps p { color: var(--ink-2); }
+
+/* ─── FAQ ─── */
+.faq { border-top: 1px solid var(--ink); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; padding: 1.1rem 2.5rem 1.1rem 0; font-weight: 700; font-size: 1.1rem; position: relative; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 0.25rem; top: 0.9rem; font-size: 1.5rem; font-weight: 400; color: var(--green); }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { color: var(--ink-2); padding: 0 0 1.25rem; max-width: 42em; }
+
+/* ─── Product grid on city pages ─── */
+.store-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem 2rem; }
+.store-grid li { border-left: 4px solid var(--lime); padding-left: 1rem; }
+.store-grid h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+
+.facts--compact { grid-template-columns: 1fr 1fr; }
+.facts--compact > div:first-child { grid-column: 1 / -1; }
+.facts--compact dd { font-size: clamp(1.3rem, 2vw, 1.6rem); white-space: nowrap; }

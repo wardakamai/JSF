@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     'oil storage', 'gas logistics', 'petroleum storage', 'tank terminal', 'bulk liquid storage',
     'Rotterdam terminal', 'Houston terminal', 'Jurong terminal', 'Fujairah terminal',
     'JSF Logistics', 'marine shipping', 'bunker fuel', 'energy logistics',
-    'crude oil storage', 'product blending', 'pipeline facilitation',
+    'crude oil storage', 'product blending', 'pipeline facilitation', 'oil tank lease', 'tank storage agreement', 'tanker chartering',
   ],
   openGraph: {
     type: 'website',
@@ -108,6 +108,8 @@ const jsonLd = {
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Marine Shipping' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Product Blending' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Pipeline Facilitation' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Tank Storage Agreements', url: 'https://jsf-logistics.com/tank-storage-agreement' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Vessel Chartering', url: 'https://jsf-logistics.com/vessel-chartering' } },
     ],
   },
 };

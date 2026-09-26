@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { company, navLinks, services, terminals } from '@/lib/site';
+import { cityHref } from '@/lib/cities';
 
 export default function Footer() {
   return (
@@ -35,7 +36,7 @@ export default function Footer() {
           <h2>Services</h2>
           <ul>
             {services.map(s => (
-              <li key={s.anchor}><Link href={`/services#${s.anchor}`}>{s.title}</Link></li>
+              <li key={s.anchor}><Link href={s.href && s.anchor !== 'oil-storage' ? s.href : `/services#${s.anchor}`}>{s.title}</Link></li>
             ))}
           </ul>
         </div>
@@ -48,11 +49,12 @@ export default function Footer() {
             <li><a href={company.phoneHref}>{company.phone}</a></li>
             <li><a href={company.linkedin} rel="noopener">LinkedIn</a></li>
           </ul>
-          <h2 style={{ marginTop: '1.5rem' }}>Terminals</h2>
+          <h2 style={{ marginTop: '1.5rem' }}>Oil storage by port</h2>
           <ul>
             {terminals.map(t => (
-              <li key={t.anchor}><Link href={`/terminals#${t.anchor}`}>{t.city}, {t.country}</Link></li>
+              <li key={t.anchor}><Link href={cityHref(t.anchor)}>Oil storage in {t.city}</Link></li>
             ))}
+            <li><Link href="/tank-storage-agreement">Tank storage agreements</Link></li>
           </ul>
         </div>
       </div>

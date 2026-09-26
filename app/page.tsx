@@ -4,6 +4,7 @@ import Image from 'next/image';
 import TerminalClocks from '@/components/shared/TerminalClocks';
 import CTABand from '@/components/shared/CTABand';
 import { services, terminals } from '@/lib/site';
+import { cityHref } from '@/lib/cities';
 
 export const metadata: Metadata = {
   title: {
@@ -109,7 +110,7 @@ export default function Home() {
           <ul className="index-list">
             {services.map(s => (
               <li key={s.anchor}>
-                <Link href={`/services#${s.anchor}`}>
+                <Link href={s.href ?? `/services#${s.anchor}`}>
                   <h3>{s.title}</h3>
                   <p>{s.summary}</p>
                 </Link>
@@ -141,7 +142,7 @@ export default function Home() {
                   <dt>Tanks</dt><dd>{t.tankCount}</dd>
                 </dl>
                 <p className="products">{t.products.slice(0, 5).join(', ')}</p>
-                <Link href={`/terminals#${t.anchor}`} className="link">Oil storage in {t.city}</Link>
+                <Link href={cityHref(t.anchor)} className="link">Oil storage in {t.city}</Link>
               </article>
             ))}
           </div>

@@ -5,12 +5,13 @@ interface PageHeroProps {
   title: string;
   subtitle?: string;
   crumb: string;
+  parents?: BreadcrumbItem[];
   image?: string;
   imageAlt?: string;
 }
 
-export default function PageHero({ title, subtitle, crumb, image, imageAlt }: PageHeroProps) {
-  const items: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, { label: crumb }];
+export default function PageHero({ title, subtitle, crumb, parents = [], image, imageAlt }: PageHeroProps) {
+  const items: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, ...parents, { label: crumb }];
 
   return (
     <section className="page-hero">

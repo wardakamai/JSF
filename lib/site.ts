@@ -19,6 +19,7 @@ export const company = {
 export const navLinks = [
   { href: '/services', label: 'Services' },
   { href: '/terminals', label: 'Terminals' },
+  { href: '/vessel-chartering', label: 'Chartering' },
   { href: '/products', label: 'Products' },
   { href: '/laboratory', label: 'Laboratory' },
   { href: '/hse', label: 'HSE' },
@@ -121,6 +122,7 @@ export const terminals: Terminal[] = [
 
 export type Service = {
   anchor: string;
+  href?: string; // dedicated page, when the service has one
   title: string;
   summary: string;
   desc: string;
@@ -130,6 +132,7 @@ export type Service = {
 export const services: Service[] = [
   {
     anchor: 'oil-storage',
+    href: '/tank-storage-agreement',
     title: 'Oil Storage',
     summary: 'Large-capacity tank storage for crude oil, fuel oil, chemicals, and refined products at our four global terminals.',
     desc: 'Our strategic storage infrastructure spans four continents, providing secure and flexible tank farm operations for crude oil, fuel oil, chemicals, and refined products. Each terminal is equipped with modern metering, blanketing, and heating systems.',
@@ -137,7 +140,7 @@ export const services: Service[] = [
       'Fixed and floating roof tanks up to 100,000 m³',
       'Full-pipeline, vessel, truck, and rail connectivity',
       'Real-time inventory monitoring and reporting',
-      'Flexible short- and long-term leasing arrangements',
+      'Flexible short- and long-term tank storage agreements',
     ],
   },
   {
@@ -174,6 +177,19 @@ export const services: Service[] = [
       'ASTM / IP / ISO standard test methods',
       'Independent surveying and cargo sampling',
       'Rapid turnaround with digital reporting',
+    ],
+  },
+  {
+    anchor: 'vessel-chartering',
+    href: '/vessel-chartering',
+    title: 'Vessel Chartering',
+    summary: 'Voyage and time charters on VLCC, Suezmax, Aframax and MR tankers for crude and petroleum products.',
+    desc: 'We charter tankers for crude oil and clean and dirty petroleum products, on voyage or time charter. Vessels can load from or discharge into leased tanks at our four terminals, so storage and shipping are arranged by one team.',
+    points: [
+      'Voyage and time charters',
+      'VLCC, Suezmax, Aframax and MR tankers',
+      'Charter party terms agreed up front',
+      'Loading and discharge at our own terminals',
     ],
   },
   {

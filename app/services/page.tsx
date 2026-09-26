@@ -3,12 +3,13 @@ import type { Metadata } from 'next';
 import PageHero from '@/components/shared/PageHero';
 import CTABand from '@/components/shared/CTABand';
 import { services, terminals } from '@/lib/site';
+import { cityHref } from '@/lib/cities';
 
 export const metadata: Metadata = {
   title: 'Oil Storage & Logistics Services — Tank Farm Operations',
   description:
-    'JSF Logistics offers crude oil storage, marine shipping, product blending, laboratory testing, road transportation, and pipeline facilitation from four global tank farm terminals.',
-  keywords: ['oil storage services', 'crude oil tank farm', 'marine shipping', 'product blending', 'petroleum laboratory testing', 'pipeline facilitation', 'liquid bulk terminal'],
+    'JSF Logistics offers oil tank leases, marine shipping, vessel chartering, product blending, laboratory testing, road transportation, and pipeline facilitation from four global tank farm terminals.',
+  keywords: ['oil storage services', 'oil tank lease', 'tank storage agreement', 'vessel chartering', 'crude oil tank farm', 'marine shipping', 'product blending', 'petroleum laboratory testing', 'pipeline facilitation', 'liquid bulk terminal'],
   alternates: {
     canonical: 'https://jsf-logistics.com/services',
   },
@@ -49,7 +50,7 @@ const servicesJsonLd = {
       '@type': 'Service',
       name: s.title,
       description: s.desc,
-      url: `https://jsf-logistics.com/services#${s.anchor}`,
+      url: s.href ? `https://jsf-logistics.com${s.href}` : `https://jsf-logistics.com/services#${s.anchor}`,
       serviceType: s.title,
       areaServed: ['Rotterdam', 'Houston', 'Jurong', 'Fujairah'],
       provider: { '@type': 'Organization', name: 'JSF Logistics B.V.', url: 'https://jsf-logistics.com' },
@@ -82,7 +83,10 @@ export default function ServicesPage() {
             <div className="col-7">
               <h2>{s.title}</h2>
               <p className="muted prose" style={{ marginBottom: '1.5rem' }}>{s.desc}</p>
-              <Link href="/contact" className="link">Enquire about {s.title.toLowerCase()}</Link>
+              <div className="btn-row" style={{ gap: '0.75rem 1.5rem' }}>
+                {s.href && <Link href={s.href} className="link">{s.anchor === 'oil-storage' ? 'How our tank storage agreements work' : `More about ${s.title.toLowerCase()}`}</Link>}
+                <Link href="/contact" className="link">Enquire about {s.title.toLowerCase()}</Link>
+              </div>
             </div>
             <div className="col-5">
               <div className="panel">
@@ -102,7 +106,7 @@ export default function ServicesPage() {
           <ul className="btn-row" style={{ listStyle: 'none' }}>
             {terminals.map(t => (
               <li key={t.anchor}>
-                <Link href={`/terminals#${t.anchor}`} className="btn btn--ghost">Oil storage in {t.city}</Link>
+                <Link href={cityHref(t.anchor)} className="btn btn--ghost">Oil storage in {t.city}</Link>
               </li>
             ))}
           </ul>

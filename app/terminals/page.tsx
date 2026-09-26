@@ -5,12 +5,13 @@ import PageHero from '@/components/shared/PageHero';
 import TerminalClocks from '@/components/shared/TerminalClocks';
 import CTABand from '@/components/shared/CTABand';
 import { terminals } from '@/lib/site';
+import { cityHref } from '@/lib/cities';
 
 export const metadata: Metadata = {
   title: 'Oil Storage Terminals — Rotterdam, Houston, Fujairah, Jurong',
   description:
     'JSF Logistics operates bulk liquid storage terminals in Rotterdam (Netherlands), Houston (Texas), Jurong (Singapore), and Fujairah (UAE) — covering every major global energy trading region.',
-  keywords: ['Rotterdam oil terminal', 'Houston energy terminal', 'Jurong bulk storage', 'Fujairah tank terminal', 'global petroleum terminals', 'bulk liquid storage', 'tank farm'],
+  keywords: ['oil tank lease', 'tank farm Rotterdam', 'tank farm Houston', 'Rotterdam oil terminal', 'Houston energy terminal', 'Jurong bulk storage', 'Fujairah tank terminal', 'global petroleum terminals', 'bulk liquid storage', 'tank farm'],
   alternates: {
     canonical: 'https://jsf-logistics.com/terminals',
   },
@@ -46,7 +47,7 @@ const localBusinessJsonLd = [
     '@type': 'LocalBusiness',
     name: 'JSF Logistics Rotterdam Terminal',
     description: 'Oil storage and tank farm terminal at Port of Rotterdam, Netherlands. Crude oil, fuel oil, chemicals, and refined product storage.',
-    url: 'https://jsf-logistics.com/terminals#rotterdam',
+    url: 'https://jsf-logistics.com/oil-storage/rotterdam',
     image: 'https://jsf-logistics.com/images/terminal-rotterdam.jpg',
     telephone: '+32-678-954-564',
     email: 'info@jsf-logistics.com',
@@ -59,7 +60,7 @@ const localBusinessJsonLd = [
     '@type': 'LocalBusiness',
     name: 'JSF Logistics Houston Terminal',
     description: 'Oil storage and tank farm terminal at Port of Houston, Texas. Crude oil, LPG, refined products, and chemicals storage.',
-    url: 'https://jsf-logistics.com/terminals#houston',
+    url: 'https://jsf-logistics.com/oil-storage/houston',
     image: 'https://jsf-logistics.com/images/terminal-houston.jpg',
     telephone: '+32-678-954-564',
     email: 'info@jsf-logistics.com',
@@ -72,7 +73,7 @@ const localBusinessJsonLd = [
     '@type': 'LocalBusiness',
     name: 'JSF Logistics Jurong Terminal',
     description: 'Bulk liquid storage and tank farm terminal at Port of Jurong, Singapore. Fuel oil, crude oil, naphtha, and chemicals storage.',
-    url: 'https://jsf-logistics.com/terminals#jurong',
+    url: 'https://jsf-logistics.com/oil-storage/jurong',
     image: 'https://jsf-logistics.com/images/terminal-jurong.jpg',
     telephone: '+32-678-954-564',
     email: 'info@jsf-logistics.com',
@@ -85,7 +86,7 @@ const localBusinessJsonLd = [
     '@type': 'LocalBusiness',
     name: 'JSF Logistics Fujairah Terminal',
     description: 'Oil storage and bunkering terminal at Port of Fujairah, UAE. Bunker fuel, crude oil, gasoil, and LNG storage.',
-    url: 'https://jsf-logistics.com/terminals#fujairah',
+    url: 'https://jsf-logistics.com/oil-storage/fujairah',
     image: 'https://jsf-logistics.com/images/terminal-fujairah.webp',
     telephone: '+32-678-954-564',
     email: 'info@jsf-logistics.com',
@@ -143,7 +144,10 @@ export default function TerminalsPage() {
                 {t.products.map(p => <li key={p}>{p}</li>)}
               </ul>
 
-              <Link href="/services" className="link">Oil storage &amp; logistics services in {t.city}</Link>
+              <div className="btn-row" style={{ gap: '0.75rem 1.5rem' }}>
+                <Link href={cityHref(t.anchor)} className="btn btn--primary">Lease oil storage in {t.city}</Link>
+                <Link href="/services" className="link" style={{ alignSelf: 'center' }}>All services in {t.city}</Link>
+              </div>
             </div>
           </section>
         ))}

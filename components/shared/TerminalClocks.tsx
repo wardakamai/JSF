@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { terminals } from '@/lib/site';
+import { cityHref } from '@/lib/cities';
 
 // Longitude window that frames Houston (-95°) to Jurong (104°).
 const LON_MIN = -110;
@@ -33,7 +34,7 @@ export default function TerminalClocks() {
             return (
               <Link
                 key={t.anchor}
-                href={`/terminals#${t.anchor}`}
+                href={cityHref(t.anchor)}
                 className={`meridian-stop${i === stops.length - 1 ? ' is-end' : ''}`}
                 style={{ left: `${pct}%` }}
               >
